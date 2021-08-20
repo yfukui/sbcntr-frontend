@@ -7,13 +7,11 @@ import {
 } from "blitz";
 import { ErrorBoundary, FallbackProps } from "react-error-boundary";
 import { queryCache } from "react-query";
-import LoginForm from "app/auth/components/LoginForm";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import React from "react";
-import Container from "@material-ui/core/Container";
-import CopyrightComponent from "../components/molecules/copyright";
+import Home from "./index";
 
 //You can customize this as you want and even move it out to a separate file
 const theme = createMuiTheme({
@@ -54,12 +52,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
 function RootErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   if (error instanceof AuthenticationError) {
-    return (
-      <Container component="main" maxWidth="xs">
-        <LoginForm onSuccess={resetErrorBoundary} />
-        <CopyrightComponent />
-      </Container>
-    );
+    return <Home />;
   } else if (error instanceof AuthorizationError) {
     return (
       <ErrorComponent
